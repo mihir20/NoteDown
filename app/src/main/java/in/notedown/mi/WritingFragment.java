@@ -15,7 +15,7 @@ public class WritingFragment extends Fragment {
 
 
     public WritingFragment() {
-        // Required empty public constructor
+
     }
 
 
