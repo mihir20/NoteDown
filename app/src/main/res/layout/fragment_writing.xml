@@ -16,9 +16,10 @@
         android:layout_gravity="bottom|center_horizontal">
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/delete_fab"
+                android:id="@+id/erase_fab"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="18dp"
                 android:layout_marginRight="24dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -28,7 +29,8 @@
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/save_fab"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="18dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginLeft="24dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
