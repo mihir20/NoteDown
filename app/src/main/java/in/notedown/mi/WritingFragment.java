@@ -1,8 +1,10 @@
 package in.notedown.mi;
 
 
+
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -30,6 +33,8 @@ import java.io.OutputStream;
  * A simple {@link Fragment} subclass.
  */
 public class WritingFragment extends Fragment {
+    private static final int REQUEST_EXTERNAL_STAORGE= 1;
+    private static String[] PERMISSION_STORAGE= {Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     public WritingFragment() {
 
@@ -56,17 +61,27 @@ public class WritingFragment extends Fragment {
         saveFAB.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap bmp= writingPad.getSignatureBitmap();
 
-                if (addJpgNoteToGallery(bmp)) {
-                    Toast.makeText(getContext(), "Note saved into the Gallery", Toast.LENGTH_SHORT).show();
+                Bitmap bmp = writingPad.getSignatureBitmap();
+
+                int permission = ActivityCompat.checkSelfPermission( getActivity(),
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE );
+
+                if (permission != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions( getActivity(),
+                            PERMISSION_STORAGE,
+                            REQUEST_EXTERNAL_STAORGE );
                 } else {
-                    Toast.makeText(getContext(), "Unable to store the note", Toast.LENGTH_SHORT).show();
-                }
+                    if (addJpgNoteToGallery( bmp )) {
+                        Toast.makeText( getContext(), "Note saved into the Gallery", Toast.LENGTH_SHORT ).show();
+                    } else {
+                        Toast.makeText( getContext(), "Unable to store the note", Toast.LENGTH_SHORT ).show();
+                    }
 
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace( R.id.fragment_container,
-                        new HomeFragment()).commit();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace( R.id.fragment_container,
+                            new HomeFragment() ).commit();
+                }
             }
         } );
 
