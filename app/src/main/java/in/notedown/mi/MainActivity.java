@@ -1,12 +1,21 @@
 package in.notedown.mi;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    private static final int REQUEST_EXTERNAL_STAORGE= 1;
+    private static String[] PERMISSION_STORAGE= {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
 
     public static FloatingActionButton fab;
     FragmentManager  fragmentManager = getSupportFragmentManager() ;
@@ -26,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
+        verifyStoragePermission( this );
         setContentView( R.layout.activity_main );
 
 
@@ -48,4 +58,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public static void verifyStoragePermission(Activity activity){
+        int permission = ActivityCompat.checkSelfPermission( activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE );
+
+        if (permission!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions( activity,
+                    PERMISSION_STORAGE,
+                    REQUEST_EXTERNAL_STAORGE );
+        }
+
+    }
 }

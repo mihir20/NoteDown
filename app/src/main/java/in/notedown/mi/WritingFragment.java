@@ -1,6 +1,7 @@
 package in.notedown.mi;
 
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -15,7 +16,6 @@ import com.github.gcacace.signaturepad.views.SignaturePad;
  * A simple {@link Fragment} subclass.
  */
 public class WritingFragment extends Fragment {
-
 
     public WritingFragment() {
 
