@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -22,10 +23,13 @@ public class NotesArrayAdapter extends RecyclerView.Adapter<NotesArrayAdapter.Vi
 
     private ArrayList<Uri> mfile;
     private Context mContext;
+    private ItemClickListener mClickListener ;
 
-    NotesArrayAdapter(ArrayList<Uri> file, Context context){
+
+    NotesArrayAdapter(ArrayList<Uri> file, Context context, ItemClickListener listener){
         this.mfile = file;
         this.mContext = context;
+        this.mClickListener = listener;
     }
 
 
@@ -54,14 +58,33 @@ public class NotesArrayAdapter extends RecyclerView.Adapter<NotesArrayAdapter.Vi
         return mfile.size();
     }
     // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
        private ImageView imageView;
 
-       public ViewHolder(View itemView) {
+       public ViewHolder(View itemView)  {
             super( itemView );
             imageView = itemView.findViewById( R.id.note_image );
-
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+
+            if (mClickListener != null) {
+                int i= 100;
+                Log.e( "Adapter click",i+"" );
+                mClickListener.onItemClick(v, getAdapterPosition());}
+        }
+    }
+    //returns item Uri at position
+    Uri getNoteImageUri(int position){
+        return mfile.get( position );
+    }
+
+
+    // parent activity will implement this method to respond to click events
+    public interface ItemClickListener {
+        void onItemClick(View view, int position);
     }
 }

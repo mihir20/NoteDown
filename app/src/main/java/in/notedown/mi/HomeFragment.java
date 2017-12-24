@@ -2,6 +2,7 @@ package in.notedown.mi;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements NotesArrayAdapter.ItemClickListener {
 
     private RecyclerView recyclerView;
     private  NotesArrayAdapter notesArrayAdapter;
@@ -63,14 +64,22 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        Log.e( "Uri", "exist: "+ uris );
         Context context = getContext();
-        notesArrayAdapter = new NotesArrayAdapter( uris, context );
+        notesArrayAdapter = new NotesArrayAdapter( uris, context ,this);
         recyclerView.setLayoutManager( layoutManager );
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter( notesArrayAdapter );
 
+
+
         return rootView;
     }
 
+    @Override
+    public void onItemClick(View view, int position) {
+        Log.e(  "onItemClick: ", "clicked"  );
+        Intent i = new Intent( getActivity(),ShowNoteActivity.class );
+        i.putExtra( "ImageUri",notesArrayAdapter.getNoteImageUri( position ) );
+        startActivity( i );
+    }
 }
