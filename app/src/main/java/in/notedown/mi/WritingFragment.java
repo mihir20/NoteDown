@@ -73,7 +73,7 @@ public class WritingFragment extends Fragment {
                             REQUEST_EXTERNAL_STAORGE );
                 } else {
                     if (addJpgNoteToGallery( bmp )) {
-                        Toast.makeText( getContext(), "Note saved into the Gallery", Toast.LENGTH_SHORT ).show();
+                        Toast.makeText( getContext(), "Note saved", Toast.LENGTH_SHORT ).show();
                     } else {
                         Toast.makeText( getContext(), "Unable to store the note", Toast.LENGTH_SHORT ).show();
                     }
@@ -114,7 +114,6 @@ public class WritingFragment extends Fragment {
             File photo = new File(getAlbumStorageDir(), String.format("Note_%d.jpg", System.currentTimeMillis()));
             saveBitmapToJPG(note, photo);
             scanMediaFile(photo);
-            Toast.makeText( getContext(),""+photo,Toast.LENGTH_LONG ).show();
             result = true;
         } catch (IOException e) {
             e.printStackTrace();

@@ -79,7 +79,7 @@ public class HomeFragment extends Fragment implements NotesArrayAdapter.ItemClic
 
     @Override
     public void onItemClick(View view, int position) {
-        Log.e(  "onItemClick: ", "clicked"  );
+
         Intent i = new Intent( getActivity(),ShowNoteActivity.class );
         i.putExtra( "IP",imagePath.get( position ) );
         startActivity( i );

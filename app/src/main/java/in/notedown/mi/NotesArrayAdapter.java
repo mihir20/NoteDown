@@ -45,7 +45,7 @@ public class NotesArrayAdapter extends RecyclerView.Adapter<NotesArrayAdapter.Vi
     @Override
     public void onBindViewHolder(NotesArrayAdapter.ViewHolder mHolder, int position) {
        // String imagePath = mfile.get( position );
-       // Log.e( "ARRAYADAPTER",imagePath );
+       // Log.e( "ARRAY_ADAPTER",imagePath );
         //((ViewHolder) mHolder).imageView.setImageBitmap( BitmapFactory.decodeFile( imagePath ) );
 
         Glide.with(mContext ).load( mfile.get( position ) )
@@ -72,15 +72,10 @@ public class NotesArrayAdapter extends RecyclerView.Adapter<NotesArrayAdapter.Vi
         public void onClick(View v) {
 
             if (mClickListener != null) {
-                int i= 100;
-                Log.e( "Adapter click",i+"" );
                 mClickListener.onItemClick(v, getAdapterPosition());}
         }
     }
-    //returns item Uri at position
-    Uri getNoteImageUri(int position){
-        return mfile.get( position );
-    }
+
 
 
     // parent activity will implement this method to respond to click events
