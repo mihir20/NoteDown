@@ -1,15 +1,16 @@
 package in.notedown.mi;
 
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
  */
 public class HomeFragment extends Fragment {
 
+    private RecyclerView recyclerView;
+    private  NotesArrayAdapter notesArrayAdapter;
 
     public HomeFragment() {
 
@@ -38,7 +41,7 @@ public class HomeFragment extends Fragment {
         ArrayList<String> imagePath = new ArrayList<>(  );
         ArrayList<Uri> uris = new ArrayList<>(  );
 
-        RecyclerView recyclerView = rootView.findViewById( R.id.notes_list );
+        recyclerView = rootView.findViewById( R.id.notes_list );
 
         GridLayoutManager layoutManager = new GridLayoutManager( container.getContext( ),2);
 
@@ -46,6 +49,7 @@ public class HomeFragment extends Fragment {
 
         File file = writingFragment.getAlbumStorageDir();
         if(file.exists()) {
+
 
             String imageFolderPath = file.getPath();
             String[] imageNames = file.list();
@@ -59,7 +63,9 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        NotesArrayAdapter notesArrayAdapter = new NotesArrayAdapter( uris );
+        Log.e( "Uri", "exist: "+ uris );
+        Context context = getContext();
+        notesArrayAdapter = new NotesArrayAdapter( uris, context );
         recyclerView.setLayoutManager( layoutManager );
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter( notesArrayAdapter );
