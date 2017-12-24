@@ -88,10 +88,10 @@ public class WritingFragment extends Fragment {
         return rootView;
     }
 
-    public File getAlbumStorageDir(String albumName) {
+    public File getAlbumStorageDir() {
         // Get the directory for the user's public pictures directory.
         File file = new File( Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), albumName);
+                Environment.DIRECTORY_PICTURES), "NoteDown");
         if (!file.mkdirs()) {
             Log.e("NoteDown", "Directory not created");
         }
@@ -111,7 +111,7 @@ public class WritingFragment extends Fragment {
     public boolean addJpgNoteToGallery(Bitmap note) {
         boolean result = false;
         try {
-            File photo = new File(getAlbumStorageDir("NoteDown"), String.format("Note_%d.jpg", System.currentTimeMillis()));
+            File photo = new File(getAlbumStorageDir(), String.format("Note_%d.jpg", System.currentTimeMillis()));
             saveBitmapToJPG(note, photo);
             scanMediaFile(photo);
             Toast.makeText( getContext(),""+photo,Toast.LENGTH_LONG ).show();
