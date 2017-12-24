@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
 public class ShowNoteActivity extends AppCompatActivity {
 
     ImageView imageView;
@@ -16,7 +18,8 @@ public class ShowNoteActivity extends AppCompatActivity {
         setContentView( R.layout.activity_shownote );
 
         imageView = (ImageView)findViewById( R.id.show_note_img);
-        Uri uri=getIntent().getData();
-        Log.e(  "onCreate: ","uri"  );
+        String s = getIntent().getStringExtra( "IP" );
+
+        Glide.with( this.getBaseContext() ).load( s ).into( imageView );
     }
 }

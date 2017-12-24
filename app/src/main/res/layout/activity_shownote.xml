@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/plainScreen"
+    android:scaleType="fitXY"
     android:id="@+id/show_note_img"
     tools:context="in.notedown.mi.ShowNoteActivity">
 

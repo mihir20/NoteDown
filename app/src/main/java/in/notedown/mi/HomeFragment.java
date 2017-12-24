@@ -25,6 +25,9 @@ public class HomeFragment extends Fragment implements NotesArrayAdapter.ItemClic
     private RecyclerView recyclerView;
     private  NotesArrayAdapter notesArrayAdapter;
 
+    ArrayList<String> imagePath = new ArrayList<>(  );
+    ArrayList<Uri> uris = new ArrayList<>(  );
+
     public HomeFragment() {
 
     }
@@ -39,8 +42,7 @@ public class HomeFragment extends Fragment implements NotesArrayAdapter.ItemClic
 
         View rootView = inflater.inflate( R.layout.fragment_home, container, false );
 
-        ArrayList<String> imagePath = new ArrayList<>(  );
-        ArrayList<Uri> uris = new ArrayList<>(  );
+
 
         recyclerView = rootView.findViewById( R.id.notes_list );
 
@@ -79,7 +81,7 @@ public class HomeFragment extends Fragment implements NotesArrayAdapter.ItemClic
     public void onItemClick(View view, int position) {
         Log.e(  "onItemClick: ", "clicked"  );
         Intent i = new Intent( getActivity(),ShowNoteActivity.class );
-        i.putExtra( "ImageUri",notesArrayAdapter.getNoteImageUri( position ) );
+        i.putExtra( "IP",imagePath.get( position ) );
         startActivity( i );
     }
 }
