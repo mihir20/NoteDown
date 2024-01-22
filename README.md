@@ -1,2 +1,2 @@
 # NoteDown
-An application for writing quick notes.
+An android application for writing quick notes just like writing on notepad.
